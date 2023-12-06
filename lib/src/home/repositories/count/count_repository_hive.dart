@@ -1,6 +1,6 @@
 import 'package:tap_roulette/src/app/repositories/hive_repository.dart';
-import 'package:tap_roulette/src/home/models/count.dart';
-import 'package:tap_roulette/src/home/repositories/home/count_repository.dart';
+import 'package:tap_roulette/src/home/models/count/count.dart';
+import 'package:tap_roulette/src/home/repositories/count/count_repository.dart';
 
 class CountRepositoryHive extends HiveRepository<Count> implements CountRepository {
   CountRepositoryHive()
