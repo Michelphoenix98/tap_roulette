@@ -24,9 +24,10 @@ class RouletteOutcomeDisplay extends StatelessWidget {
               );
             }),
             AnimatedSwitcher(
+              switchOutCurve: Curves.easeIn,
               duration: const Duration(milliseconds: 500),
               child: Column(
-                key: ValueKey(state.result),
+                key: UniqueKey(),
                 children: [
                   Text(
                     state.result != HomeTapResult.normal

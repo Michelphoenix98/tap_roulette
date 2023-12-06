@@ -18,7 +18,9 @@ class HomeTapCubit extends Cubit<HomeTapState> {
         );
 
   Future<void> onTap() async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(
+      isLoading: true,
+    ));
     final randomNumber = Random().nextInt(60);
 
     int currentSeconds = DateTime.now().second;
