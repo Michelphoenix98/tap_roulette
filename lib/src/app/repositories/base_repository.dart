@@ -1,17 +1,17 @@
 abstract class BaseRepository<T> {
   Stream<EntityChangedEvent<T>> get changes;
 
-  Map<String, dynamic> toJson(T object);
-
-  T fromJson(Map<String, dynamic> json);
+  int getCount();
 
   Future<T> create(T object);
 
-  Future<T> get();
+  String getUid(T object);
 
-  Future<T> update(T object);
+  T setUid(T object, String uid);
 
-  Future<bool> delete(T object);
+  Map<String, dynamic> toJson(T object);
+
+  T fromJson(Map<String, dynamic> json);
 }
 
 class EntityChangedEvent<T> {
@@ -25,5 +25,5 @@ class EntityChangedEvent<T> {
 }
 
 enum EntityChangedEventType {
-  updated,
+  created,
 }
