@@ -19,16 +19,38 @@ class TapRouletteHomeScreen extends StatefulWidget {
   State<TapRouletteHomeScreen> createState() => _TapRouletteHomeScreenState();
 }
 
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        color: Theme.of(context).scaffoldBackgroundColor, // Match Scaffold background color
+        child: Center(
+            child: Text(
+          'Tap Roulette',
+          style: Theme.of(context).textTheme.titleLarge,
+        )),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
 class _TapRouletteHomeScreenState extends State<TapRouletteHomeScreen> {
   final confettiController = ConfettiController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      //   title: Text(widget.title),
+      // ),
+      appBar: const CustomAppBar(),
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -45,11 +67,11 @@ class _TapRouletteHomeScreenState extends State<TapRouletteHomeScreen> {
         child: Builder(builder: (context) {
           return BlocConsumer<HomeTapCubit, HomeTapState>(
             listener: (_, state) {
-              if (state.result != null && state.result == HomeTapResult.success) {
+              if (state.result == HomeTapResult.success) {
                 confettiController.play();
               }
 
-              if (state.result != null && state.result == HomeTapResult.normal) {
+              if (state.result == HomeTapResult.normal) {
                 confettiController.stop();
               }
             },

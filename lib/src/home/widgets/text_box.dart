@@ -26,6 +26,7 @@ class TextBox extends StatelessWidget {
             offset: -_distance,
             inset: true,
           ),
+          // ignore: prefer_const_constructors
           BoxShadow(
             blurRadius: blur,
             color: const Color(

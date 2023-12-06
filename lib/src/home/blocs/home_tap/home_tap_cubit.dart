@@ -46,6 +46,7 @@ class HomeTapCubit extends Cubit<HomeTapState> {
       emit(
         state.copyWith(
           result: HomeTapResult.normal,
+          randomNumber: null,
           isLoading: false,
         ),
       );

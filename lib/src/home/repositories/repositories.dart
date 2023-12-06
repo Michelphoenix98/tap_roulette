@@ -1,1 +1,1 @@
-export 'count/count_repository.dart';
+export 'count/count.dart';

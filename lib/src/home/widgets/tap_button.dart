@@ -18,7 +18,7 @@ class _TapButtonState extends State<TapButton> {
   bool _isPressed = false;
   @override
   Widget build(BuildContext context) {
-    final _distance = _isPressed ? const Offset(5, 5) : const Offset(14, 14);
+    final distance = _isPressed ? const Offset(5, 5) : const Offset(14, 14);
     final double blur = _isPressed ? 5.0 : 30.0;
     return Listener(
       onPointerUp: (_) => setState(() => _isPressed = !_isPressed),
@@ -37,7 +37,7 @@ class _TapButtonState extends State<TapButton> {
             BoxShadow(
               blurRadius: blur,
               color: Colors.white,
-              offset: -_distance,
+              offset: -distance,
               inset: _isPressed,
             ),
             BoxShadow(
@@ -45,7 +45,7 @@ class _TapButtonState extends State<TapButton> {
               color: const Color(
                 0xFFA7A9AF,
               ),
-              offset: _distance,
+              offset: distance,
               inset: _isPressed,
             )
           ],

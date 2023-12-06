@@ -20,29 +20,33 @@ class RouletteOutcomeDisplay extends StatelessWidget {
             BlocBuilder<HomeFetchCubit, HomeFetchState>(builder: (context, state) {
               return Text(
                 'Past wins: ${state.count.toString()}',
-                style: TextStyle(color: Colors.blueAccent),
+                style: const TextStyle(color: Colors.blueAccent),
               );
             }),
-            Column(
-              children: [
-                Text(
-                  state.result != HomeTapResult.normal
-                      ? '${state.result.name.toString().capitalize()}!'
-                      : '',
-                  style: const TextStyle(fontSize: 32),
-                ),
-              ],
-            ),
-            state.result == HomeTapResult.success
-                ? Icon(
-                    Icons.emoji_events,
-                    color: Colors.black54,
-                    size: 40,
-                  )
-                : SizedBox(
-                    width: 40,
-                    height: 40,
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              child: Column(
+                key: ValueKey(state.result),
+                children: [
+                  Text(
+                    state.result != HomeTapResult.normal
+                        ? '${state.result.name.toString().capitalize()}!'
+                        : '',
+                    style: const TextStyle(fontSize: 32),
                   ),
+                  state.result == HomeTapResult.success
+                      ? const Icon(
+                          Icons.emoji_events,
+                          color: Colors.black54,
+                          size: 40,
+                        )
+                      : const SizedBox(
+                          width: 40,
+                          height: 40,
+                        ),
+                ],
+              ),
+            ),
           ],
         ),
       );
