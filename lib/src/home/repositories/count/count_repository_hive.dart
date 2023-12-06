@@ -7,7 +7,10 @@ class CountRepositoryHive extends HiveRepository<Count> implements CountReposito
       : super(
           boxName: 'rouletteTaps',
           getUid: (count) => count.uid,
-          setUid: (count, uid) => count.copyWith(uid: uid),
+          setUid: (count, uid) => count.copyWith(
+            uid: uid,
+            count: int.parse(uid),
+          ),
           toJson: (count) => count.toJson(),
           fromJson: (json) => Count.fromJson(json),
         );
