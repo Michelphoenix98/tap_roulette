@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeTapState {
-  HomeTapResult? get result => throw _privateConstructorUsedError;
+  HomeTapResult get result => throw _privateConstructorUsedError;
+  int? get randomNumber => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $HomeTapStateCopyWith<$Res> {
           HomeTapState value, $Res Function(HomeTapState) then) =
       _$HomeTapStateCopyWithImpl<$Res, HomeTapState>;
   @useResult
-  $Res call({HomeTapResult? result, bool isLoading});
+  $Res call({HomeTapResult result, int? randomNumber, bool isLoading});
 }
 
 /// @nodoc
@@ -46,14 +47,19 @@ class _$HomeTapStateCopyWithImpl<$Res, $Val extends HomeTapState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = freezed,
+    Object? result = null,
+    Object? randomNumber = freezed,
     Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      result: freezed == result
+      result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as HomeTapResult?,
+              as HomeTapResult,
+      randomNumber: freezed == randomNumber
+          ? _value.randomNumber
+          : randomNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -70,7 +76,7 @@ abstract class _$$HomeTapStateImplCopyWith<$Res>
       __$$HomeTapStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HomeTapResult? result, bool isLoading});
+  $Res call({HomeTapResult result, int? randomNumber, bool isLoading});
 }
 
 /// @nodoc
@@ -84,14 +90,19 @@ class __$$HomeTapStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = freezed,
+    Object? result = null,
+    Object? randomNumber = freezed,
     Object? isLoading = null,
   }) {
     return _then(_$HomeTapStateImpl(
-      result: freezed == result
+      result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as HomeTapResult?,
+              as HomeTapResult,
+      randomNumber: freezed == randomNumber
+          ? _value.randomNumber
+          : randomNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -103,17 +114,23 @@ class __$$HomeTapStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeTapStateImpl implements _HomeTapState {
-  const _$HomeTapStateImpl({this.result, this.isLoading = false});
+  const _$HomeTapStateImpl(
+      {this.result = HomeTapResult.normal,
+      this.randomNumber,
+      this.isLoading = false});
 
   @override
-  final HomeTapResult? result;
+  @JsonKey()
+  final HomeTapResult result;
+  @override
+  final int? randomNumber;
   @override
   @JsonKey()
   final bool isLoading;
 
   @override
   String toString() {
-    return 'HomeTapState(result: $result, isLoading: $isLoading)';
+    return 'HomeTapState(result: $result, randomNumber: $randomNumber, isLoading: $isLoading)';
   }
 
   @override
@@ -122,12 +139,14 @@ class _$HomeTapStateImpl implements _HomeTapState {
         (other.runtimeType == runtimeType &&
             other is _$HomeTapStateImpl &&
             (identical(other.result, result) || other.result == result) &&
+            (identical(other.randomNumber, randomNumber) ||
+                other.randomNumber == randomNumber) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, result, isLoading);
+  int get hashCode => Object.hash(runtimeType, result, randomNumber, isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -138,10 +157,14 @@ class _$HomeTapStateImpl implements _HomeTapState {
 
 abstract class _HomeTapState implements HomeTapState {
   const factory _HomeTapState(
-      {final HomeTapResult? result, final bool isLoading}) = _$HomeTapStateImpl;
+      {final HomeTapResult result,
+      final int? randomNumber,
+      final bool isLoading}) = _$HomeTapStateImpl;
 
   @override
-  HomeTapResult? get result;
+  HomeTapResult get result;
+  @override
+  int? get randomNumber;
   @override
   bool get isLoading;
   @override

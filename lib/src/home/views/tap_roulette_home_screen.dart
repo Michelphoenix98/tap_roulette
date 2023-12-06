@@ -1,20 +1,33 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tap_roulette/src/home/blocs/home_fetch/home_fetch_cubit.dart';
 import 'package:tap_roulette/src/home/blocs/home_tap/home_tap_cubit.dart';
 import 'package:tap_roulette/src/home/repositories/count/count.dart';
+import 'package:tap_roulette/src/home/widgets/random_number_display.dart';
+import 'package:tap_roulette/src/home/widgets/roulette_outcome_display.dart';
+import 'package:tap_roulette/src/home/widgets/tap_button.dart';
 
-class TapRouletteHomeScreen extends StatelessWidget {
+class TapRouletteHomeScreen extends StatefulWidget {
   const TapRouletteHomeScreen({super.key, required this.title});
 
   final String title;
+
+  @override
+  State<TapRouletteHomeScreen> createState() => _TapRouletteHomeScreenState();
+}
+
+class _TapRouletteHomeScreenState extends State<TapRouletteHomeScreen> {
+  final confettiController = ConfettiController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: MultiBlocProvider(
         providers: [
@@ -30,31 +43,56 @@ class TapRouletteHomeScreen extends StatelessWidget {
           ),
         ],
         child: Builder(builder: (context) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                BlocBuilder<HomeFetchCubit, HomeFetchState>(builder: (context, state) {
-                  return Text(state.count.toString());
-                }),
-                BlocBuilder<HomeTapCubit, HomeTapState>(builder: (context, state) {
-                  if (state.result == null) return SizedBox.shrink();
+          return BlocConsumer<HomeTapCubit, HomeTapState>(
+            listener: (_, state) {
+              if (state.result != null && state.result == HomeTapResult.success) {
+                confettiController.play();
+              }
 
-                  return Text(state.result!.toString());
-                }),
-
-                TextButton(
-                  onPressed: () {
-                    print('tap!');
-                    context.read<HomeTapCubit>().onTap();
-                  },
-                  child: Text('TAP'),
-                ),
-                // Text(
-                //   '$_counter 90',
-                //   style: Theme.of(context).textTheme.headlineMedium,
-                // ),
-              ],
+              if (state.result != null && state.result == HomeTapResult.normal) {
+                confettiController.stop();
+              }
+            },
+            builder: (_, state) => Center(
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      const RouletteOutcomeDisplay(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TapButton(
+                            onTap: (state.result != HomeTapResult.success)
+                                ? () {
+                                    print('tap!');
+                                    context.read<HomeTapCubit>().onTap();
+                                  }
+                                : () {},
+                            child: const Text(
+                              'Tap',
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                            ),
+                          ),
+                          const RandomNumberDisplay(),
+                        ],
+                      ),
+                      // Text(
+                      //   '$_counter 90',
+                      //   style: Theme.of(context).textTheme.headlineMedium,
+                      // ),
+                    ],
+                  ),
+                  ConfettiWidget(
+                    emissionFrequency: 0.1,
+                    confettiController: confettiController,
+                    blastDirection: pi / 2,
+                  ),
+                ],
+              ),
             ),
           );
         }),

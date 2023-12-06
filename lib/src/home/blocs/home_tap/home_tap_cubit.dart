@@ -30,11 +30,25 @@ class HomeTapCubit extends Cubit<HomeTapState> {
         ),
       );
     }
+    var isSuccess = randomNumber == currentSeconds;
     emit(
       state.copyWith(
-        result: randomNumber == currentSeconds ? HomeTapResult.success : HomeTapResult.retry,
+        randomNumber: randomNumber,
+        result: isSuccess ? HomeTapResult.success : HomeTapResult.retry,
         isLoading: false,
       ),
     );
+    if (isSuccess) {
+      await Future.delayed(
+        const Duration(milliseconds: 5000),
+      );
+
+      emit(
+        state.copyWith(
+          result: HomeTapResult.normal,
+          isLoading: false,
+        ),
+      );
+    }
   }
 }
