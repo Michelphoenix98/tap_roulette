@@ -30,7 +30,7 @@ home_tap_cubit.dart manages core business logic, generating random numbers, and 
 
 ### Views Layer:
 
-Neuromorphic design with shadows and lighting provides a visually appealing 3D effect.
+Neumorphic design with shadows and lighting provides a visually appealing 3D effect.
 Enhanced user experience includes confetti animations on success and temporary button disablement for better feedback.
 
 ## Core Principles
@@ -61,7 +61,7 @@ Updates the count in the local Hive database and triggers an EntityChangedEvent,
 
 ## User Experience
 
-### Neuromorphic Design:
+### Neumorphic Design:
 
 Utilizes cleverly placed shadows and lighting for a 3D effect.
 
