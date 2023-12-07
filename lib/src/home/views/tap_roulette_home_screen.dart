@@ -6,9 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tap_roulette/src/home/blocs/home_fetch/home_fetch_cubit.dart';
 import 'package:tap_roulette/src/home/blocs/home_tap/home_tap_cubit.dart';
 import 'package:tap_roulette/src/home/repositories/count/count.dart';
-import 'package:tap_roulette/src/home/widgets/random_number_display.dart';
-import 'package:tap_roulette/src/home/widgets/roulette_outcome_display.dart';
-import 'package:tap_roulette/src/home/widgets/tap_button.dart';
+import 'package:tap_roulette/src/home/widgets/widgets.dart';
 
 class TapRouletteHomeScreen extends StatefulWidget {
   const TapRouletteHomeScreen({super.key, required this.title});
@@ -17,27 +15,6 @@ class TapRouletteHomeScreen extends StatefulWidget {
 
   @override
   State<TapRouletteHomeScreen> createState() => _TapRouletteHomeScreenState();
-}
-
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color: Theme.of(context).scaffoldBackgroundColor, // Match Scaffold background color
-        child: Center(
-            child: Text(
-          'Tap Roulette',
-          style: Theme.of(context).textTheme.titleLarge,
-        )),
-      ),
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class _TapRouletteHomeScreenState extends State<TapRouletteHomeScreen> {
@@ -86,7 +63,6 @@ class _TapRouletteHomeScreenState extends State<TapRouletteHomeScreen> {
                           TapButton(
                             onTap: (state.result != HomeTapResult.success)
                                 ? () {
-                                    print('tap!');
                                     context.read<HomeTapCubit>().onTap();
                                   }
                                 : () {},
