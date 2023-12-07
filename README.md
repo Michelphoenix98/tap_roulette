@@ -48,9 +48,9 @@ Demonstrates the Single Responsibility Principle with dedicated blocs serving di
 ### CountRepositoryHive
 `CountRepositoryHive` gets the total success count and updates the Hive database.
 
-### Business Logic
+## Business Logic
 
-## Home Fetch Cubit:
+### Home Fetch Cubit:
 
 Fetches the total win count or success count.
 
